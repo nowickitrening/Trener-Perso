@@ -1,36 +1,28 @@
-
-  $(function () {
+$(function() {
 
     // MENU
-    $('.navbar-collapse a').on('click',function(){
-      $(".navbar-collapse").collapse('hide');
+    $('.navbar-collapse a').on('click', function(){
+        $(".navbar-collapse").collapse('hide');
     });
 
     // AOS ANIMATION
     AOS.init({
-      disable: 'mobile',
-      duration: 800,
-      anchorPlacement: 'center-bottom'
+        disable: 'mobile',
+        duration: 600,
+        once: true
     });
 
-
-    // SMOOTHSCROLL NAVBAR
-    $(function() {
-      $('.navbar a, .hero-text a').on('click', function(event) {
+    // SMOOTHSCROLL (Wykluczamy przyciski z atrybutem data-cal-link)
+    $('.nav-link.smoothScroll, a.smoothScroll').on('click', function(event) {
         var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top - 49
-        }, 1000);
-        event.preventDefault();
-      });
-    });    
-  });
+        var href = $anchor.attr('href');
 
-$(document).on('click', '[data-cal-link]', function(e) {
-  e.preventDefault();
-  if (window.Cal) {
-    window.Cal("modal", { calLink: $(this).attr('data-cal-link') });
-  }
+        if (href && href.startsWith('#') && href.length > 1) {
+            $('html, body').stop().animate({
+                scrollTop: $(href).offset().top - 49
+            }, 1000);
+            event.preventDefault();
+        }
+    });
+
 });
-    
-
