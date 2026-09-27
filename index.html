@@ -22,8 +22,8 @@
     <!-- Cal element-embed script begin -->
     <script type="text/javascript">
       (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let c = C.Cal = C.Cal || function () { let cal = c; let ar = arguments; if (!cal.q) { cal.q = []; } if (typeof ar[0] === 'string') { if (ar[0] === 'init') { let api = function () { p(api, arguments); }; let namespace = ar[1]; api.q = api.q || []; if (typeof namespace === 'string') { cal.ns = cal.ns || {}; cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else { p(cal, ar); } return; } p(cal, ar); } }; })(window, "https://app.cal.com/embed/embed.js", "init");
-      Cal("init", "konsultacja", {origin:"https://cal.com"});
-      Cal.ns.konsultacja("ui", {"theme":"dark","styles":{"branding":{"brandColor":"#F2FF00"}},"hideEventTypeDetails":false,"layout":"month_view"});
+      Cal("init", {origin:"https://cal.com"});
+      Cal("ui", {"theme":"dark","styles":{"branding":{"brandColor":"#F2FF00"}},"hideEventTypeDetails":false,"layout":"month_view"});
     </script>
     <!-- Cal element-embed script end -->
     
@@ -83,7 +83,7 @@
 
                         <h1 class="text-white" data-aos="fade-up" data-aos-delay="500">ZBUDUJ SYLWETKĘ I PEWNOŚĆ SIEBIE</h1>
 
-                        <a href="#" data-cal-namespace="konsultacja" data-cal-link="jakub.nowickitrening/konsultacja" class="btn custom-btn bordered mt-3 font-weight-bold" data-aos="fade-up" data-aos-delay="600">Umów bezpłatną konsultację</a>
+                        <button id="btn-cal-hero" type="button" class="btn custom-btn bordered mt-3 font-weight-bold" data-aos="fade-up" data-aos-delay="600">Umów bezpłatną konsultację</button>
 
                         <a href="#about" class="btn custom-btn mt-3 font-weight-bold" data-aos="fade-up" data-aos-delay="700">Kim jestem?</a>
 
@@ -108,7 +108,7 @@
                         Nie wiesz, od czego zacząć? Na pierwszym spotkaniu omówimy Twoje cele, przeanalizujemy dotychczasowe nawyki i dobierzemy bezpieczny plan treningowy dopasowany do Twojego trybu życia.
                     </p>
 
-                    <a href="#" data-cal-namespace="konsultacja" data-cal-link="jakub.nowickitrening/konsultacja" class="btn custom-btn bg-color mt-3 text-dark font-weight-bold" style="color: #000000 !important; font-weight: 700;">UMÓW DARMOWĄ KONSULTACJĘ</a>
+                    <button id="btn-cal-feature" type="button" class="btn custom-btn bg-color mt-3 text-dark font-weight-bold" style="color: #000000 !important; font-weight: 700;">UMÓW DARMOWĄ KONSULTACJĘ</button>
                 </div>
 
             </div>
@@ -202,11 +202,9 @@
                         </ul>
                     </div>
 
-                    <a href="#" data-cal-namespace="konsultacja" data-cal-link="jakub.nowickitrening/konsultacja" style="display: block; text-align: center; background: #F2FF00; color: #000000; padding: 14px 20px; border-radius: 8px; font-weight: 800; text-decoration: none; transition: all 0.3s ease;"
-                       onmouseover="this.style.opacity='0.9';"
-                       onmouseout="this.style.opacity='1';">
+                    <button id="btn-cal-offer" type="button" style="display: block; width: 100%; border: none; cursor: pointer; text-align: center; background: #F2FF00; color: #000000; padding: 14px 20px; border-radius: 8px; font-weight: 800; transition: all 0.3s ease;">
                         UMÓW TRENING
-                    </a>
+                    </button>
                 </div>
 
                 <!-- KAFELEK 2: Prowadzenie Online -->
@@ -327,6 +325,28 @@
     <script src="js/aos.js"></script>
     <script src="js/smoothscroll.js"></script>
     <script src="js/custom.js"></script>
+
+   <!-- Skrypt wymuszający bezbłędne otwieranie Cal.com -->
+    <script>
+      function openCalModal(e) {
+        if (e) e.preventDefault();
+        if (window.Cal) {
+          window.Cal("modal", {
+            calLink: "jakub-nowicki/konsultacja"
+          });
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function() {
+        var btnHero = document.getElementById("btn-cal-hero");
+        var btnFeature = document.getElementById("btn-cal-feature");
+        var btnOffer = document.getElementById("btn-cal-offer");
+
+        if (btnHero) btnHero.addEventListener("click", openCalModal);
+        if (btnFeature) btnFeature.addEventListener("click", openCalModal);
+        if (btnOffer) btnOffer.addEventListener("click", openCalModal);
+      });
+    </script>
 
 </body>
 </html>
