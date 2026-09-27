@@ -83,7 +83,7 @@
 
                         <h1 class="text-white" data-aos="fade-up" data-aos-delay="500">ZBUDUJ SYLWETKĘ I PEWNOŚĆ SIEBIE</h1>
 
-                        <button id="btn-cal-hero" type="button" class="btn custom-btn bordered mt-3 font-weight-bold" data-aos="fade-up" data-aos-delay="600">Umów bezpłatną konsultację</button>
+                        <a href="#" data-cal-link="jakub-nowicki/konsultacja" class="btn custom-btn bordered mt-3 font-weight-bold" data-aos="fade-up" data-aos-delay="600">Umów bezpłatną konsultację</a>
 
                         <a href="#about" class="btn custom-btn mt-3 font-weight-bold" data-aos="fade-up" data-aos-delay="700">Kim jestem?</a>
 
@@ -108,7 +108,7 @@
                         Nie wiesz, od czego zacząć? Na pierwszym spotkaniu omówimy Twoje cele, przeanalizujemy dotychczasowe nawyki i dobierzemy bezpieczny plan treningowy dopasowany do Twojego trybu życia.
                     </p>
 
-                    <button id="btn-cal-feature" type="button" class="btn custom-btn bg-color mt-3 text-dark font-weight-bold" style="color: #000000 !important; font-weight: 700;">UMÓW DARMOWĄ KONSULTACJĘ</button>
+                    <a href="#" data-cal-link="jakub-nowicki/konsultacja" class="btn custom-btn bg-color mt-3 text-dark font-weight-bold" style="color: #000000 !important; font-weight: 700;">UMÓW DARMOWĄ KONSULTACJĘ</a>
                 </div>
 
             </div>
@@ -202,9 +202,11 @@
                         </ul>
                     </div>
 
-                    <button id="btn-cal-offer" type="button" style="display: block; width: 100%; border: none; cursor: pointer; text-align: center; background: #F2FF00; color: #000000; padding: 14px 20px; border-radius: 8px; font-weight: 800; transition: all 0.3s ease;">
+                    <a href="#" data-cal-link="jakub-nowicki/konsultacja" style="display: block; text-align: center; background: #F2FF00; color: #000000; padding: 14px 20px; border-radius: 8px; font-weight: 800; text-decoration: none; transition: all 0.3s ease;"
+                       onmouseover="this.style.opacity='0.9';"
+                       onmouseout="this.style.opacity='1';">
                         UMÓW TRENING
-                    </button>
+                    </a>
                 </div>
 
                 <!-- KAFELEK 2: Prowadzenie Online -->
@@ -325,28 +327,6 @@
     <script src="js/aos.js"></script>
     <script src="js/smoothscroll.js"></script>
     <script src="js/custom.js"></script>
-
-   <!-- Skrypt wymuszający bezbłędne otwieranie Cal.com -->
-    <script>
-      function openCalModal(e) {
-        if (e) e.preventDefault();
-        if (window.Cal) {
-          window.Cal("modal", {
-            calLink: "jakub-nowicki/konsultacja"
-          });
-        }
-      }
-
-      document.addEventListener("DOMContentLoaded", function() {
-        var btnHero = document.getElementById("btn-cal-hero");
-        var btnFeature = document.getElementById("btn-cal-feature");
-        var btnOffer = document.getElementById("btn-cal-offer");
-
-        if (btnHero) btnHero.addEventListener("click", openCalModal);
-        if (btnFeature) btnFeature.addEventListener("click", openCalModal);
-        if (btnOffer) btnOffer.addEventListener("click", openCalModal);
-      });
-    </script>
 
 </body>
 </html>
