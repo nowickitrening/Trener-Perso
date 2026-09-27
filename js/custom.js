@@ -26,6 +26,11 @@
     });    
   });
 
-
+$(document).on('click', '[data-cal-link]', function(e) {
+  e.preventDefault();
+  if (window.Cal) {
+    window.Cal("modal", { calLink: $(this).attr('data-cal-link') });
+  }
+});
     
 
