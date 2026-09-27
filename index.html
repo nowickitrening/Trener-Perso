@@ -19,32 +19,11 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="css/tooplate-gymso-style.css">
 
-    <!-- Cal.com embed script -->
+    <!-- Cal.com embed code -->
     <script type="text/javascript">
       (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let c = C.Cal = C.Cal || function () { let cal = c; let ar = arguments; if (!cal.q) { cal.q = []; } if (typeof ar[0] === 'string') { if (ar[0] === 'init') { let api = function () { p(api, arguments); }; let namespace = ar[1]; api.q = api.q || []; if (typeof namespace === 'string') { cal.ns = cal.ns || {}; cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else { p(cal, ar); } return; } p(cal, ar); } }; })(window, "https://app.cal.com/embed/embed.js", "init");
       Cal("init", {origin:"https://cal.com"});
       Cal("ui", {"theme":"dark","styles":{"branding":{"brandColor":"#F2FF00"}},"hideEventTypeDetails":false,"layout":"month_view"});
-
-      // Funkcja otwierająca okienko i blokująca szkodliwe skrypty z custom.js
-      function otworzKonsultacje(e) {
-        if (e) {
-          e.preventDefault();
-          e.stopPropagation(); // Blokuje przechwytywanie kliknięcia przez jQuery z custom.js
-        }
-        if (window.Cal) {
-          try {
-            Cal("modal", {
-              calLink: "jakub.nowickitrening/konsultacja",
-              config: {"layout":"month_view"}
-            });
-            return false;
-          } catch(err) {
-            console.error("Cal.com modal error:", err);
-          }
-        }
-        window.open("https://cal.com/jakub.nowickitrening/konsultacja", "_blank");
-        return false;
-      }
     </script>
 
 </head>
@@ -103,7 +82,7 @@
 
                         <h1 class="text-white" data-aos="fade-up" data-aos-delay="500">ZBUDUJ SYLWETKĘ I PEWNOŚĆ SIEBIE</h1>
 
-                        <a href="https://cal.com/jakub.nowickitrening/konsultacja" onclick="return otworzKonsultacje(event);" class="btn custom-btn bordered mt-3 font-weight-bold" data-aos="fade-up" data-aos-delay="600">Umów bezpłatną konsultację</a>
+                        <button type="button" class="btn custom-btn bordered mt-3 font-weight-bold btn-cal" data-aos="fade-up" data-aos-delay="600">Umów bezpłatną konsultację</button>
 
                         <a href="#about" class="btn custom-btn mt-3 font-weight-bold smoothScroll" data-aos="fade-up" data-aos-delay="700">Kim jestem?</a>
 
@@ -128,7 +107,7 @@
                         Nie wiesz, od czego zacząć? Na pierwszym spotkaniu omówimy Twoje cele, przeanalizujemy dotychczasowe nawyki i dobierzemy bezpieczny plan treningowy dopasowany do Twojego trybu życia.
                     </p>
 
-                    <a href="https://cal.com/jakub.nowickitrening/konsultacja" onclick="return otworzKonsultacje(event);" class="btn custom-btn bg-color mt-3 text-dark font-weight-bold" style="color: #000000 !important; font-weight: 700;">UMÓW DARMOWĄ KONSULTACJĘ</a>
+                    <button type="button" class="btn custom-btn bg-color mt-3 text-dark font-weight-bold btn-cal" style="color: #000000 !important; font-weight: 700;">UMÓW DARMOWĄ KONSULTACJĘ</button>
                 </div>
 
             </div>
@@ -222,11 +201,11 @@
                         </ul>
                     </div>
 
-                    <a href="https://cal.com/jakub.nowickitrening/konsultacja" onclick="return otworzKonsultacje(event);" style="display: block; text-align: center; background: #F2FF00; color: #000000; padding: 14px 20px; border-radius: 8px; font-weight: 800; text-decoration: none; transition: all 0.3s ease;"
+                    <button type="button" class="btn-cal" style="display: block; width: 100%; border: none; text-align: center; background: #F2FF00; color: #000000; padding: 14px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; transition: all 0.3s ease;"
                        onmouseover="this.style.opacity='0.9';"
                        onmouseout="this.style.opacity='1';">
                         UMÓW TRENING
-                    </a>
+                    </button>
                 </div>
 
                 <!-- KAFELEK 2: Prowadzenie Online -->
@@ -346,6 +325,27 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/aos.js"></script>
     <script src="js/custom.js"></script>
+
+    <!-- Bezawaryjny skrypt wywołania Cal.com (działa na najwyższym poziomie przechwytywania zdarzeń) -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var calButtons = document.querySelectorAll('.btn-cal');
+        calButtons.forEach(function(button) {
+          button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (typeof window.Cal === "function") {
+              window.Cal("modal", {
+                calLink: "jakub.nowickitrening/konsultacja",
+                config: { layout: "month_view" }
+              });
+            } else {
+              window.open("https://cal.com/jakub.nowickitrening/konsultacja", "_blank");
+            }
+          }, true); // 'true' = Event Capture Phase (najwyższy priorytet tak jak w Calendly)
+        });
+      });
+    </script>
 
 </body>
 </html>
